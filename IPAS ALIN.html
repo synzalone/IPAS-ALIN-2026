@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis IPA Kelas 3 SD - Seru & Menyenangkan!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@600;800;900&display=swap');
+
+        :root {
+            --bg-color: #a8e6cf;
+            --card-bg: #ffffff;
+            --primary: #ff8b94;
+            --secondary: #ffd3b6;
+            --text-dark: #2d3436;
+            --success: #55efc4;
+            --danger: #ff7675;
+            --info: #74b9ff;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: url('https://www.transparenttextures.com/patterns/cubes.png'), linear-gradient(135deg, var(--bg-color), #dcedc1);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        .container {
+            background: var(--card-bg);
+            width: 95%;
+            max-width: 700px;
+            border-radius: 25px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            padding: 30px;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+            display: none;
+            animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 5px solid white;
+        }
+
+        .container.active { display: block; }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        h1 {
+            font-family: 'Comic Neue', cursive;
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+
+        p.subtitle {
+            text-align: center;
+            font-size: 16px;
+            color: #636e72;
+            margin-bottom: 25px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 20px;
+            border: 3px dashed var(--info);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input[type="text"]:focus { border-color: var(--primary); background: #fff9fa; }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 900;
+            width: 100%;
+            transition: all 0.2s;
+            box-shadow: 0 5px 0 #d66a73;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .btn:hover { transform: translateY(2px); box-shadow: 0 3px 0 #d66a73; }
+        .btn:active { transform: translateY(5px); box-shadow: 0 0 0 #d66a73; }
+        
+        .btn-submit-multi { background: var(--info); box-shadow: 0 5px 0 #0984e3; margin-top: 15px; }
+        .btn-submit-multi:hover { box-shadow: 0 3px 0 #0984e3; }
+        .btn-submit-multi:active { box-shadow: 0 0 0 #0984e3; }
+
+        .header-info {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 900;
+            font-size: 18px;
+            color: #b2bec3;
+            border-bottom: 3px dotted #dfe6e9;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .timer-bar {
+            width: 100%; height: 15px; background: #dfe6e9;
+            border-radius: 10px; margin-bottom: 20px; overflow: hidden;
+        }
+        .timer-fill {
+            height: 100%; background: var(--success);
+            width: 100%; transition: width 1s linear, background 0.5s;
+        }
+
+        .question-text {
+            font-size: 22px; font-weight: 800;
+            margin-bottom: 20px; line-height: 1.5; color: #2d3436;
+        }
+
+        .question-image {
+            max-width: 100%; height: auto; max-height: 220px;
+            border-radius: 15px; margin: 0 auto 20px auto;
+            display: block; border: 3px solid #dfe6e9;
+        }
+
+        .options-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+
+        .option-btn {
+            background: #f1f2f6; border: 3px solid transparent;
+            padding: 15px; font-size: 18px; border-radius: 15px;
+            cursor: pointer; transition: 0.2s; font-family: 'Nunito', sans-serif;
+            font-weight: 700; text-align: left; color: #2f3640;
+        }
+        .option-btn:hover { background: #eccc68; border-color: #ffa502; transform: scale(1.02); }
+
+        .option-label {
+            background: #f1f2f6; border: 3px solid transparent;
+            padding: 15px; font-size: 18px; border-radius: 15px;
+            cursor: pointer; font-weight: 700; display: flex; align-items: center; gap: 15px;
+        }
+        .option-label:hover { background: #eccc68; border-color: #ffa502; }
+        .option-label input { width: 25px; height: 25px; cursor: pointer; accent-color: var(--primary); }
+
+        .badge-type {
+            display: inline-block; background: #ffeaa7; color: #d63031;
+            padding: 5px 15px; border-radius: 20px; font-size: 14px;
+            font-weight: 900; margin-bottom: 15px; border: 2px dashed #fab1a0;
+        }
+
+        /* Modals */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(45, 52, 54, 0.8); display: none;
+            justify-content: center; align-items: center; z-index: 1000;
+        }
+
+        .modal-content {
+            background: white; padding: 30px; border-radius: 25px;
+            text-align: center; max-width: 500px; width: 90%;
+            animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            border: 5px solid var(--info);
+        }
+
+        @keyframes zoomIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .feedback-title { font-size: 32px; font-weight: 900; margin-bottom: 10px; font-family: 'Comic Neue', cursive; }
+        .benar { color: var(--success); }
+        .salah { color: var(--danger); }
+
+        .pembahasan-box {
+            background: #f1f2f6; border-left: 6px solid var(--info);
+            padding: 20px; margin: 20px 0; border-radius: 10px;
+            text-align: left; font-size: 18px; font-weight: 700; line-height: 1.5;
+        }
+
+        .score-circle {
+            width: 160px; height: 160px;
+            background: radial-gradient(circle, var(--success) 0%, #00b894 100%);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 55px; font-weight: 900; color: white;
+            margin: 0 auto 20px auto; border: 8px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Start Screen -->
+    <div id="start-screen" class="container active">
+        <h1>🌱 Kuis IPA Kelas 3 🌱</h1>
+        <p class="subtitle">Materi: Pancaindra, Daur Hidup, Lingkungan & Tumbuhan</p>
+        <input type="text" id="playerName" placeholder="Ketik namamu di sini ya..." autocomplete="off">
+        <button class="btn" onclick="startQuiz()">Mulai Belajar!</button>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div id="quiz-screen" class="container">
+        <div class="header-info">
+            <span id="player-display">👦👧 Nama</span>
+            <span id="question-counter">Soal 1/25</span>
+        </div>
+        <div class="timer-bar"><div class="timer-fill" id="timer-fill"></div></div>
+        <div id="time-text" style="text-align: right; margin-top:-15px; margin-bottom:15px; font-weight:900; color:#b2bec3;">60 detik</div>
+        
+        <div id="badge-container"></div>
+        <img id="question-image" class="question-image" style="display:none;" src="" alt="Gambar Soal">
+        <div class="question-text" id="question-text">Pertanyaan...</div>
+        
+        <div class="options-grid" id="options-container"></div>
+        <button id="btn-submit-multi" class="btn btn-submit-multi" style="display:none;" onclick="checkMultiAnswer()">Jawab!</button>
+    </div>
+
+    <!-- End Screen -->
+    <div id="end-screen" class="container">
+        <h1>Kuis Selesai! 🎉</h1>
+        <div class="score-circle" id="final-score">100</div>
+        <h2 id="final-message" style="color:var(--primary);">Hebat!</h2>
+        <button class="btn" onclick="startQuiz()">Main Lagi (Soal Baru)</button>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedback-modal" class="modal-overlay">
+        <div class="modal-content" style="border:none; background:transparent; box-shadow:none;">
+            <div id="feedback-message" class="feedback-title" style="background:white; padding:30px; border-radius:25px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);"></div>
+        </div>
+    </div>
+
+    <!-- Pembahasan Modal -->
+    <div id="pembahasan-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 style="margin-top:0; color:var(--primary); font-family:'Comic Neue', cursive; font-size: 28px;">💡 Pembahasan</h2>
+            <div class="pembahasan-box" id="pembahasan-text"></div>
+            <button class="btn" style="background:var(--success); box-shadow: 0 5px 0 #00b894;" onclick="closePembahasan()">Mengerti 👍</button>
+            <div style="font-size: 15px; color: #b2bec3; margin-top: 15px; font-weight:700;" id="pembahasan-timer-text">Otomatis lanjut dalam 60 detik...</div>
+        </div>
+    </div>
+
+    <script>
+        // Bank Soal: 33 Soal
+        const bankSoal = [
+            // PANCAINDRA & KESEHATAN
+            { type: "pg", q: "Manusia memiliki 5 alat indra. Indra yang berfungsi untuk mengecap rasa makanan adalah...", options: ["Hidung", "Lidah", "Kulit", "Telinga"], answer: 1, exp: "Lidah adalah indra pengecap yang membuat kita bisa merasakan manis, asin, asam, dan pahit." },
+            { type: "multi", q: "Yang termasuk ke dalam bagian dari 5 pancaindra manusia adalah...", options: ["Mata", "Jantung", "Telinga", "Lambung", "Kulit"], answer: [0, 2, 4], exp: "5 Pancaindra manusia adalah Mata, Hidung, Telinga, Lidah, dan Kulit." },
+            { type: "bs", q: "Benar atau Salah: Kita boleh membaca buku di tempat yang sangat gelap agar mata sehat.", options: ["Benar", "Salah"], answer: 1, exp: "Salah! Membaca di tempat gelap dapat merusak mata. Kita harus membaca di tempat yang terang." },
+            { type: "image_pg", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Ear_icon.svg/200px-Ear_icon.svg.png", q: "Perhatikan gambar alat indra di atas! Fungsi utama daun telinga pada manusia adalah...", options: ["Menyaring kotoran besar", "Mengumpulkan suara dari luar", "Menjaga keseimbangan tubuh", "Mendengar suara dari dalam tubuh"], answer: 1, exp: "Daun telinga bentuknya lebar seperti corong untuk membantu mengumpulkan gelombang suara agar masuk ke dalam lubang telinga." },
+            { type: "pg", q: "Rambut halus yang ada di dalam lubang hidung kita berguna untuk...", options: ["Memperindah bentuk hidung", "Menyaring kotoran dan debu yang masuk", "Menghangatkan udara", "Mencium bau wangi saja"], answer: 1, exp: "Rambut hidung dan selaput lendir bertugas menyaring debu agar udara yang masuk ke paru-paru tetap bersih." },
+            { type: "bs", q: "Benar atau Salah: Mendengarkan suara televisi dengan volume yang sangat keras dapat merusak fungsi telinga.", options: ["Benar", "Salah"], answer: 0, exp: "Benar! Suara yang terlalu keras dapat merusak gendang telinga." },
+            { type: "pg", q: "Cara yang benar untuk menjaga kebersihan indra peraba (kulit) adalah...", options: ["Mandi dua kali sehari memakai sabun", "Mandi seminggu sekali", "Berjemur di bawah terik matahari seharian", "Menggosok kulit dengan benda kasar"], answer: 0, exp: "Kulit dijaga kesehatannya dengan rutin mandi dua kali sehari menggunakan air bersih dan sabun." },
+
+            // SIKLUS HIDUP & METAMORFOSIS
+            { type: "pg", q: "Urutan daur hidup kupu-kupu yang benar adalah...", options: ["Telur -> Kepompong -> Ulat -> Kupu-kupu", "Telur -> Ulat -> Kepompong -> Kupu-kupu", "Ulat -> Telur -> Kupu-kupu -> Kepompong", "Kupu-kupu -> Kepompong -> Ulat -> Telur"], answer: 1, exp: "Kupu-kupu berasal dari telur, menetas menjadi ulat (larva), menjadi kepompong (pupa), lalu menjadi kupu-kupu dewasa." },
+            { type: "multi", q: "Hewan apa sajakah yang mengalami metamorfosis sempurna?", options: ["Nyamuk", "Kucing", "Katak", "Sapi", "Lalat"], answer: [0, 2, 4], exp: "Metamorfosis sempurna dialami oleh hewan yang bentuk anaknya sangat berbeda dengan induknya, seperti nyamuk, katak, lalat, dan kupu-kupu." },
+            { type: "image_pg", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Frog_lifecycle_new.svg/320px-Frog_lifecycle_new.svg.png", q: "Tahapan awal pada daur hidup katak sebelum menjadi berudu adalah...", options: ["Katak berekor", "Katak dewasa", "Telur", "Kepompong"], answer: 2, exp: "Siklus hidup katak dimulai dari Telur -> Berudu (Kecebong) -> Katak Berekor (Katak Muda) -> Katak Dewasa." },
+            { type: "pg", q: "Hewan yang mengalami metamorfosis TIDAK sempurna tidak akan melewati fase (tahapan)...", options: ["Telur", "Pupa / Kepompong", "Nimfa / Hewan muda", "Hewan dewasa"], answer: 1, exp: "Metamorfosis tidak sempurna (seperti kecoa dan belalang) hanya melalui 3 tahap: Telur -> Nimfa -> Dewasa. Mereka tidak bertukar menjadi kepompong." },
+            { type: "bs", q: "Benar atau Salah: Saat masih menjadi berudu, katak bernapas menggunakan insang karena hidup di air.", options: ["Benar", "Salah"], answer: 0, exp: "Benar. Berudu hidup di air sehingga bernapas dengan insang. Setelah dewasa katak bernapas dengan paru-paru dan kulit." },
+            { type: "pg", q: "Fase ulat pada daur hidup kupu-kupu sering merugikan petani karena...", options: ["Ulat suka memakan daun tanaman", "Ulat suka memakan buah-buahan", "Ulat membuat tanaman layu", "Ulat terbang mengganggu petani"], answer: 0, exp: "Pada fase ulat (larva), hewan ini sangat rakus memakan daun untuk mengumpulkan energi sebelum menjadi kepompong." },
+            { type: "pg", q: "Jentik-jentik atau udang air yang sering kita lihat di bak mandi adalah tahapan hidup dari hewan...", options: ["Katak", "Kupu-kupu", "Nyamuk", "Lalat"], answer: 2, exp: "Jentik-jentik nyamuk berasal dari telur nyamuk yang menetas di genangan air." },
+
+            // KOMPONEN BIOTIK ABIOTIK & ENERGI
+            { type: "pg", q: "Semua makhluk hidup dalam suatu lingkungan seperti tumbuhan, hewan, dan manusia disebut komponen...", options: ["Abiotik", "Biotik", "Atmosfer", "Ekosistem"], answer: 1, exp: "Komponen Biotik adalah komponen lingkungan yang terdiri atas makhluk hidup (Bio = hidup)." },
+            { type: "multi", q: "Berikut ini yang merupakan contoh dari komponen abiotik (benda tak hidup) adalah...", options: ["Batu", "Pohon Pisang", "Air", "Tanah", "Burung Merpati"], answer: [0, 2, 3], exp: "Komponen abiotik adalah benda tak hidup penyusun lingkungan, seperti air, batu, tanah, udara, dan cahaya." },
+            { type: "bs", q: "Benar atau Salah: Tumbuhan membutuhkan komponen abiotik seperti air dan sinar matahari untuk membuat makanan.", options: ["Benar", "Salah"], answer: 0, exp: "Benar. Tumbuhan butuh air, tanah, dan sinar matahari (komponen abiotik) untuk melakukan fotosintesis." },
+            { type: "image_pg", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b4/Sun_icon.svg/200px-Sun_icon.svg.png", q: "Gambar di atas menunjukkan sumber energi abiotik terbesar di bumi, yaitu...", options: ["Bulan", "Bintang", "Matahari", "Listrik"], answer: 2, exp: "Matahari adalah sumber energi panas dan cahaya terbesar di bumi yang merupakan bagian dari komponen abiotik." },
+            { type: "pg", q: "Udara merupakan salah satu komponen abiotik. Gas di udara yang paling penting untuk pernapasan manusia dan hewan adalah...", options: ["Karbondioksida", "Oksigen", "Asap", "Uap air"], answer: 1, exp: "Manusia dan hewan bernapas menghirup Oksigen dan mengeluarkan Karbondioksida." },
+
+            // PELESTARIAN LINGKUNGAN & HEMAT AIR
+            { type: "pg", q: "Cara paling mudah yang bisa dilakukan oleh siswa untuk melestarikan lingkungan sekolah adalah...", options: ["Menebang pohon di halaman", "Membuang sampah pada tempatnya", "Membakar sampah di kelas", "Mencoret-coret tembok sekolah"], answer: 1, exp: "Membuang sampah pada tempatnya adalah langkah sederhana menjaga kebersihan dan kelestarian lingkungan." },
+            { type: "multi", q: "Cara yang benar untuk menghemat penggunaan air di rumah adalah...", options: ["Mematikan keran air saat menyikat gigi", "Mandi menggunakan shower air secukupnya", "Menyiram tanaman dengan air yang sangat banyak", "Membiarkan keran air bak mandi meluber"], answer: [0, 1], exp: "Air bersih sangat berharga. Kita harus mematikan keran jika tidak dipakai untuk menghematnya." },
+            { type: "bs", q: "Benar atau Salah: Menanam kembali pohon di hutan yang gundul (reboisasi) dapat mencegah bencana banjir.", options: ["Benar", "Salah"], answer: 0, exp: "Benar! Akar pohon berguna menyerap dan menyimpan air hujan sehingga mencegah banjir." },
+            { type: "pg", q: "Tempat yang dibuat oleh pemerintah untuk melindungi tumbuhan yang hampir punah disebut...", options: ["Kebun binatang", "Suaka margasatwa", "Cagar alam", "Taman bermain"], answer: 2, exp: "Cagar alam adalah daerah khusus untuk melestarikan tumbuhan langka beserta lingkungannya." },
+            { type: "pg", q: "Tindakan manusia yang merusak komponen lingkungan abiotik, khususnya tanah dan air sungai adalah...", options: ["Menanam pohon mangga", "Membuang limbah pabrik dan deterjen ke sungai", "Menyapu halaman rumah", "Membuat taman kota"], answer: 1, exp: "Limbah kimia dan sampah yang dibuang ke sungai akan mencemari air (komponen abiotik) dan mematikan ikan (biotik)." },
+            { type: "pg", q: "Air cucian beras atau sayuran sebaiknya digunakan untuk...", options: ["Diminum", "Mandi", "Menyiram tanaman", "Dibuang ke got"], answer: 2, exp: "Memanfaatkan air bekas cucian beras untuk menyiram tanaman adalah salah satu cara cerdas menghemat air." },
+
+            // TANAMAN SINGKONG & PERKEMBANGBIAKAN
+            { type: "pg", q: "Tanaman singkong atau ubi kayu biasanya berkembang biak (ditanam) menggunakan cara...", options: ["Menanam bijinya", "Stek batang (menancapkan potongan batang)", "Mencangkok daunnya", "Menanam bunganya"], answer: 1, exp: "Singkong sangat mudah ditanam dengan cara stek batang, yaitu memotong batang singkong dan menancapkannya ke tanah." },
+            { type: "bs", q: "Benar atau Salah: Tanaman singkong menyimpan cadangan makanannya di bagian daun.", options: ["Benar", "Salah"], answer: 1, exp: "Salah! Tanaman singkong menyimpan cadangan makanannya di dalam tanah pada bagian akar (umbi akar)." },
+            { type: "image_pg", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Cassava_root.jpg/320px-Cassava_root.jpg", q: "Perhatikan gambar panen tanaman di atas! Bagian yang biasa direbus atau digoreng untuk kita makan adalah...", options: ["Batang", "Daun", "Akar/Umbi", "Bunga"], answer: 2, exp: "Umbi akar pada singkong adalah bagian yang membesar berisi karbohidrat yang biasa kita jadikan makanan." },
+            
+            // TAMBAHAN ACAK
+            { type: "multi", q: "Dari daftar di bawah ini, mana saja hewan yang daur hidupnya dimulai dari telur?", options: ["Sapi", "Ayam", "Kupu-kupu", "Katak", "Kucing"], answer: [1, 2, 3], exp: "Sapi dan kucing berkembang biak dengan cara beranak (melahirkan), sedangkan ayam, kupu-kupu, dan katak dari telur." },
+            { type: "pg", q: "Organ yang berfungsi memompa darah dalam tubuh kita tidak termasuk pancaindra. Organ tersebut adalah...", options: ["Jantung", "Paru-paru", "Mata", "Kulit"], answer: 0, exp: "Jantung berfungsi memompa darah, ia adalah organ dalam, bukan pancaindra." },
+            { type: "bs", q: "Benar atau Salah: Matahari hanya berguna untuk menghangatkan bumi, tidak ada gunanya bagi tumbuhan.", options: ["Benar", "Salah"], answer: 1, exp: "Salah! Matahari sangat penting bagi tumbuhan untuk melakukan fotosintesis (membuat makanan)." },
+            { type: "pg", q: "Salah satu olahan makanan tradisional yang berasal dari tumbuhan singkong adalah...", options: ["Keju", "Getuk", "Sosis", "Roti gandum"], answer: 1, exp: "Getuk, tiwul, dan keripik singkong adalah makanan lezat yang dibuat dari umbi singkong." },
+            { type: "pg", q: "Saat kupu-kupu hinggap dari satu bunga ke bunga lain untuk mengisap nektar, secara tidak sengaja ia juga membantu...", options: ["Merusak bunga", "Penyerbukan bunga", "Bunga menjadi layu", "Bunga dimakan ulat"], answer: 1, exp: "Kupu-kupu membantu proses penyerbukan pada tumbuhan agar tumbuhan bisa menghasilkan buah/biji." }
+        ];
+
+        let userName = "";
+        let selectedQuestions = [];
+        let currentIndex = 0;
+        let score = 0;
+        let totalQuestions = 25;
+        
+        let timerInterval;
+        let timeLeft = 60;
+        let pembInterval;
+        let pembTimeLeft = 60;
+
+        // Elements
+        const screens = {
+            start: document.getElementById('start-screen'),
+            quiz: document.getElementById('quiz-screen'),
+            end: document.getElementById('end-screen')
+        };
+        const els = {
+            nameInput: document.getElementById('playerName'),
+            playerDisplay: document.getElementById('player-display'),
+            counter: document.getElementById('question-counter'),
+            qText: document.getElementById('question-text'),
+            qImg: document.getElementById('question-image'),
+            optionsBox: document.getElementById('options-container'),
+            badgeCont: document.getElementById('badge-container'),
+            timerFill: document.getElementById('timer-fill'),
+            timeText: document.getElementById('time-text'),
+            btnMulti: document.getElementById('btn-submit-multi'),
+            fbModal: document.getElementById('feedback-modal'),
+            fbMsg: document.getElementById('feedback-message'),
+            pembModal: document.getElementById('pembahasan-modal'),
+            pembText: document.getElementById('pembahasan-text'),
+            pembTimer: document.getElementById('pembahasan-timer-text'),
+            fScore: document.getElementById('final-score'),
+            fMsg: document.getElementById('final-message')
+        };
+
+        function shuffle(array) {
+            let arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function startQuiz() {
+            let input = els.nameInput.value.trim();
+            if(!input && !userName) {
+                alert("Isi namamu dulu ya sebelum mulai belajar!");
+                return;
+            }
+            if(input) userName = input;
+
+            els.playerDisplay.innerText = "⭐ " + userName;
+            selectedQuestions = shuffle(bankSoal).slice(0, totalQuestions);
+            currentIndex = 0;
+            score = 0;
+
+            switchScreen('quiz');
+            loadQuestion();
+        }
+
+        function switchScreen(screenId) {
+            Object.values(screens).forEach(s => s.classList.remove('active'));
+            screens[screenId].classList.add('active');
+        }
+
+        function loadQuestion() {
+            clearInterval(timerInterval);
+            timeLeft = 60;
+            updateTimerUI();
+            els.btnMulti.style.display = 'none';
+            els.qImg.style.display = 'none';
+            
+            let q = selectedQuestions[currentIndex];
+            els.counter.innerText = `Soal ${currentIndex + 1} dari ${totalQuestions}`;
+            els.qText.innerText = q.q;
+
+            // Handle Image
+            if(q.type === 'image_pg' && q.img) {
+                els.qImg.src = q.img;
+                els.qImg.style.display = 'block';
+            }
+
+            // Handle Badge
+            let typeText = q.type === 'multi' ? "Pilih Jawaban Lebih Dari Satu!" : (q.type === 'bs' ? "Pilih Benar atau Salah!" : "Pilihan Ganda");
+            els.badgeCont.innerHTML = `<span class="badge-type">${typeText}</span>`;
+
+            // Render Options
+            els.optionsBox.innerHTML = "";
+            
+            if(q.type === 'pg' || q.type === 'image_pg') {
+                let opts = shuffle(q.options.map((opt, i) => ({text: opt, idx: i})));
+                opts.forEach(opt => {
+                    let btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.innerText = opt.text;
+                    btn.onclick = () => checkAnswerPG(opt.idx);
+                    els.optionsBox.appendChild(btn);
+                });
+            } else if(q.type === 'bs') {
+                q.options.forEach((opt, i) => {
+                    let btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.style.textAlign = 'center';
+                    btn.style.fontSize = '22px';
+                    btn.innerText = opt;
+                    btn.onclick = () => checkAnswerPG(i);
+                    els.optionsBox.appendChild(btn);
+                });
+            } else if(q.type === 'multi') {
+                q.options.forEach((opt, i) => {
+                    let lbl = document.createElement('label');
+                    lbl.className = 'option-label';
+                    lbl.innerHTML = `<input type="checkbox" value="${i}"> ${opt}`;
+                    els.optionsBox.appendChild(lbl);
+                });
+                els.btnMulti.style.display = 'block';
+            }
+
+            // Start Timer
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerUI();
+                if(timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    handleTimeout();
+                }
+            }, 1000);
+        }
+
+        function updateTimerUI() {
+            let pct = (timeLeft / 60) * 100;
+            els.timerFill.style.width = pct + "%";
+            els.timeText.innerText = timeLeft + " detik";
+            
+            if(timeLeft <= 10) {
+                els.timerFill.style.background = "var(--danger)";
+                els.timeText.style.color = "var(--danger)";
+            } else {
+                els.timerFill.style.background = "var(--success)";
+                els.timeText.style.color = "#b2bec3";
+            }
+        }
+
+        function disableInputs() {
+            let btns = els.optionsBox.querySelectorAll('button, input');
+            btns.forEach(b => b.disabled = true);
+            els.btnMulti.disabled = true;
+        }
+
+        function checkAnswerPG(selectedIdx) {
+            clearInterval(timerInterval);
+            disableInputs();
+            let isCorrect = selectedIdx === selectedQuestions[currentIndex].answer;
+            if(isCorrect) score++;
+            showFeedback(isCorrect);
+        }
+
+        function checkMultiAnswer() {
+            clearInterval(timerInterval);
+            disableInputs();
+            let checkboxes = els.optionsBox.querySelectorAll('input[type="checkbox"]');
+            let selected = [];
+            checkboxes.forEach(cb => { if(cb.checked) selected.push(parseInt(cb.value)); });
+            
+            let correctArr = selectedQuestions[currentIndex].answer;
+            // Validasi jumlah dan isi array
+            let isCorrect = selected.length === correctArr.length && selected.every(val => correctArr.includes(val));
+            
+            if(isCorrect) score++;
+            showFeedback(isCorrect);
+        }
+
+        function handleTimeout() {
+            disableInputs();
+            showFeedback(false, true);
+        }
+
+        function showFeedback(isCorrect, isTimeout = false) {
+            els.fbModal.style.display = 'flex';
+            if(isCorrect) {
+                els.fbMsg.innerHTML = `<span class="benar">🎉 ${userName} kamu Hebat!</span>`;
+            } else {
+                let msg = isTimeout ? `⏰ Yah waktu habis!` : `💪 Coba Lagi ya, ${userName}!`;
+                els.fbMsg.innerHTML = `<span class="salah">${msg}</span>`;
+            }
+            
+            setTimeout(() => {
+                els.fbModal.style.display = 'none';
+                showPembahasan();
+            }, 1500);
+        }
+
+        function showPembahasan() {
+            els.pembModal.style.display = 'flex';
+            els.pembText.innerText = selectedQuestions[currentIndex].exp;
+            
+            pembTimeLeft = 60;
+            els.pembTimer.innerText = `Otomatis lanjut dalam ${pembTimeLeft} detik...`;
+            
+            pembInterval = setInterval(() => {
+                pembTimeLeft--;
+                els.pembTimer.innerText = `Otomatis lanjut dalam ${pembTimeLeft} detik...`;
+                if(pembTimeLeft <= 0) closePembahasan();
+            }, 1000);
+        }
+
+        function closePembahasan() {
+            clearInterval(pembInterval);
+            els.pembModal.style.display = 'none';
+            els.btnMulti.disabled = false;
+            currentIndex++;
+            if(currentIndex < totalQuestions) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            switchScreen('end');
+            let finalVal = Math.round((score / totalQuestions) * 100);
+            els.fScore.innerText = finalVal;
+            
+            if(finalVal >= 90) els.fMsg.innerText = `Luar Biasa, ${userName}! Kamu sangat pintar! 🏆`;
+            else if(finalVal >= 75) els.fMsg.innerText = `Kerja Bagus, ${userName}! Tingkatkan belajarmu ya! 🌟`;
+            else els.fMsg.innerText = `Tetap Semangat, ${userName}! Jangan menyerah! 💪`;
+        }
+    </script>
+</body>
+</html>
+
