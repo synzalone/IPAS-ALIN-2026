@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuis IPA Kelas 3 SD - Seru & Menyenangkan!</title>
+    <title>Kuis Pintar IPA Kelas 3 SD</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@600;800;900&display=swap');
 
         :root {
-            --bg-color: #a8e6cf;
+            --bg-color: #e0f7fa;
             --card-bg: #ffffff;
-            --primary: #ff8b94;
-            --secondary: #ffd3b6;
-            --text-dark: #2d3436;
-            --success: #55efc4;
-            --danger: #ff7675;
-            --info: #74b9ff;
+            --primary: #ff7043;
+            --secondary: #ffe082;
+            --text-dark: #37474f;
+            --success: #26a69a;
+            --danger: #ef5350;
+            --info: #29b6f6;
         }
 
         body {
             font-family: 'Nunito', sans-serif;
-            background: url('https://www.transparenttextures.com/patterns/cubes.png'), linear-gradient(135deg, var(--bg-color), #dcedc1);
+            background: linear-gradient(135deg, var(--bg-color), #b2ebf2);
             margin: 0;
             padding: 0;
             display: flex;
@@ -33,15 +33,15 @@
         .container {
             background: var(--card-bg);
             width: 95%;
-            max-width: 700px;
+            max-width: 750px;
             border-radius: 25px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
             padding: 30px;
             box-sizing: border-box;
             position: relative;
             overflow: hidden;
             display: none;
-            animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: bounceIn 0.5s ease-out;
             border: 5px solid white;
         }
 
@@ -57,15 +57,16 @@
             font-weight: 700;
             color: var(--primary);
             text-align: center;
-            font-size: 32px;
+            font-size: 34px;
             margin-bottom: 5px;
         }
 
         p.subtitle {
             text-align: center;
             font-size: 16px;
-            color: #636e72;
+            color: #546e7a;
             margin-bottom: 25px;
+            line-height: 1.5;
         }
 
         input[type="text"] {
@@ -83,7 +84,7 @@
             transition: 0.3s;
         }
 
-        input[type="text"]:focus { border-color: var(--primary); background: #fff9fa; }
+        input[type="text"]:focus { border-color: var(--primary); background: #fff3e0; }
 
         .btn {
             background: var(--primary);
@@ -96,30 +97,30 @@
             font-weight: 900;
             width: 100%;
             transition: all 0.2s;
-            box-shadow: 0 5px 0 #d66a73;
+            box-shadow: 0 6px 0 #d84315;
             font-family: 'Nunito', sans-serif;
         }
 
-        .btn:hover { transform: translateY(2px); box-shadow: 0 3px 0 #d66a73; }
-        .btn:active { transform: translateY(5px); box-shadow: 0 0 0 #d66a73; }
+        .btn:hover { transform: translateY(2px); box-shadow: 0 4px 0 #d84315; }
+        .btn:active { transform: translateY(6px); box-shadow: 0 0 0 #d84315; }
         
-        .btn-submit-multi { background: var(--info); box-shadow: 0 5px 0 #0984e3; margin-top: 15px; }
-        .btn-submit-multi:hover { box-shadow: 0 3px 0 #0984e3; }
-        .btn-submit-multi:active { box-shadow: 0 0 0 #0984e3; }
+        .btn-submit-multi { background: var(--info); box-shadow: 0 6px 0 #0277bd; margin-top: 15px; }
+        .btn-submit-multi:hover { box-shadow: 0 4px 0 #0277bd; }
+        .btn-submit-multi:active { box-shadow: 0 0 0 #0277bd; }
 
         .header-info {
             display: flex;
             justify-content: space-between;
             font-weight: 900;
             font-size: 18px;
-            color: #b2bec3;
-            border-bottom: 3px dotted #dfe6e9;
+            color: #78909c;
+            border-bottom: 3px dotted #cfd8dc;
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
 
         .timer-bar {
-            width: 100%; height: 15px; background: #dfe6e9;
+            width: 100%; height: 16px; background: #eceff1;
             border-radius: 10px; margin-bottom: 20px; overflow: hidden;
         }
         .timer-fill {
@@ -129,49 +130,50 @@
 
         .question-text {
             font-size: 22px; font-weight: 800;
-            margin-bottom: 20px; line-height: 1.5; color: #2d3436;
+            margin-bottom: 20px; line-height: 1.5; color: #263238;
         }
 
         .question-image {
-            max-width: 100%; height: auto; max-height: 220px;
+            max-width: 100%; height: auto; max-height: 250px;
             border-radius: 15px; margin: 0 auto 20px auto;
-            display: block; border: 3px solid #dfe6e9;
+            display: block; border: 4px solid #eceff1;
+            object-fit: cover;
         }
 
         .options-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
 
         .option-btn {
-            background: #f1f2f6; border: 3px solid transparent;
+            background: #f5f5f5; border: 3px solid transparent;
             padding: 15px; font-size: 18px; border-radius: 15px;
             cursor: pointer; transition: 0.2s; font-family: 'Nunito', sans-serif;
-            font-weight: 700; text-align: left; color: #2f3640;
+            font-weight: 700; text-align: left; color: #37474f;
         }
-        .option-btn:hover { background: #eccc68; border-color: #ffa502; transform: scale(1.02); }
+        .option-btn:hover { background: #fff9c4; border-color: #fbc02d; transform: scale(1.01); }
 
         .option-label {
-            background: #f1f2f6; border: 3px solid transparent;
+            background: #f5f5f5; border: 3px solid transparent;
             padding: 15px; font-size: 18px; border-radius: 15px;
             cursor: pointer; font-weight: 700; display: flex; align-items: center; gap: 15px;
         }
-        .option-label:hover { background: #eccc68; border-color: #ffa502; }
+        .option-label:hover { background: #fff9c4; border-color: #fbc02d; }
         .option-label input { width: 25px; height: 25px; cursor: pointer; accent-color: var(--primary); }
 
         .badge-type {
-            display: inline-block; background: #ffeaa7; color: #d63031;
-            padding: 5px 15px; border-radius: 20px; font-size: 14px;
-            font-weight: 900; margin-bottom: 15px; border: 2px dashed #fab1a0;
+            display: inline-block; background: #ffe082; color: #e65100;
+            padding: 6px 16px; border-radius: 20px; font-size: 14px;
+            font-weight: 900; margin-bottom: 15px; border: 2px dashed #ffb74d;
         }
 
         /* Modals */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(45, 52, 54, 0.8); display: none;
+            background: rgba(38, 50, 56, 0.85); display: none;
             justify-content: center; align-items: center; z-index: 1000;
         }
 
         .modal-content {
             background: white; padding: 30px; border-radius: 25px;
-            text-align: center; max-width: 500px; width: 90%;
+            text-align: center; max-width: 550px; width: 90%;
             animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             border: 5px solid var(--info);
         }
@@ -186,123 +188,121 @@
         .salah { color: var(--danger); }
 
         .pembahasan-box {
-            background: #f1f2f6; border-left: 6px solid var(--info);
+            background: #f5f5f5; border-left: 6px solid var(--info);
             padding: 20px; margin: 20px 0; border-radius: 10px;
-            text-align: left; font-size: 18px; font-weight: 700; line-height: 1.5;
+            text-align: left; font-size: 18px; font-weight: 700; line-height: 1.5; color: #37474f;
         }
 
         .score-circle {
             width: 160px; height: 160px;
-            background: radial-gradient(circle, var(--success) 0%, #00b894 100%);
+            background: radial-gradient(circle, var(--success) 0%, #00897b 100%);
             border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-size: 55px; font-weight: 900; color: white;
-            margin: 0 auto 20px auto; border: 8px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            font-size: 60px; font-weight: 900; color: white;
+            margin: 0 auto 20px auto; border: 8px solid white; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
     </style>
 </head>
 <body>
 
-    <!-- Start Screen -->
+    <!-- Layar Awal -->
     <div id="start-screen" class="container active">
-        <h1>🌱 Kuis IPA Kelas 3 🌱</h1>
-        <p class="subtitle">Materi: Pancaindra, Daur Hidup, Lingkungan & Tumbuhan</p>
+        <h1>🌱 Petualangan IPA Kelas 3 🌱</h1>
+        <p class="subtitle">
+            <b>Materi yang diuji:</b> Pancaindra, Metamorfosis Hewan, Lingkungan Biotik & Abiotik, Energi, Menghemat Air, dan Tanaman Singkong.
+        </p>
         <input type="text" id="playerName" placeholder="Ketik namamu di sini ya..." autocomplete="off">
         <button class="btn" onclick="startQuiz()">Mulai Belajar!</button>
     </div>
 
-    <!-- Quiz Screen -->
+    <!-- Layar Kuis -->
     <div id="quiz-screen" class="container">
         <div class="header-info">
             <span id="player-display">👦👧 Nama</span>
             <span id="question-counter">Soal 1/25</span>
         </div>
         <div class="timer-bar"><div class="timer-fill" id="timer-fill"></div></div>
-        <div id="time-text" style="text-align: right; margin-top:-15px; margin-bottom:15px; font-weight:900; color:#b2bec3;">60 detik</div>
+        <div id="time-text" style="text-align: right; margin-top:-15px; margin-bottom:15px; font-weight:900; color:#78909c;">60 detik</div>
         
         <div id="badge-container"></div>
         <img id="question-image" class="question-image" style="display:none;" src="" alt="Gambar Soal">
         <div class="question-text" id="question-text">Pertanyaan...</div>
         
         <div class="options-grid" id="options-container"></div>
-        <button id="btn-submit-multi" class="btn btn-submit-multi" style="display:none;" onclick="checkMultiAnswer()">Jawab!</button>
+        <button id="btn-submit-multi" class="btn btn-submit-multi" style="display:none;" onclick="checkMultiAnswer()">Kunci Jawaban!</button>
     </div>
 
-    <!-- End Screen -->
+    <!-- Layar Selesai -->
     <div id="end-screen" class="container">
         <h1>Kuis Selesai! 🎉</h1>
         <div class="score-circle" id="final-score">100</div>
         <h2 id="final-message" style="color:var(--primary);">Hebat!</h2>
-        <button class="btn" onclick="startQuiz()">Main Lagi (Soal Baru)</button>
+        <button class="btn" onclick="startQuiz()">Kerjakan Ulang (Soal Baru)</button>
     </div>
 
-    <!-- Feedback Modal -->
+    <!-- Modal Benar/Salah -->
     <div id="feedback-modal" class="modal-overlay">
         <div class="modal-content" style="border:none; background:transparent; box-shadow:none;">
-            <div id="feedback-message" class="feedback-title" style="background:white; padding:30px; border-radius:25px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);"></div>
+            <div id="feedback-message" class="feedback-title" style="background:white; padding:35px; border-radius:25px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);"></div>
         </div>
     </div>
 
-    <!-- Pembahasan Modal -->
+    <!-- Modal Pembahasan -->
     <div id="pembahasan-modal" class="modal-overlay">
         <div class="modal-content">
-            <h2 style="margin-top:0; color:var(--primary); font-family:'Comic Neue', cursive; font-size: 28px;">💡 Pembahasan</h2>
+            <h2 style="margin-top:0; color:var(--primary); font-family:'Comic Neue', cursive; font-size: 28px;">💡 Penjelasan Singkat</h2>
             <div class="pembahasan-box" id="pembahasan-text"></div>
-            <button class="btn" style="background:var(--success); box-shadow: 0 5px 0 #00b894;" onclick="closePembahasan()">Mengerti 👍</button>
-            <div style="font-size: 15px; color: #b2bec3; margin-top: 15px; font-weight:700;" id="pembahasan-timer-text">Otomatis lanjut dalam 60 detik...</div>
+            <button class="btn" style="background:var(--success); box-shadow: 0 6px 0 #00897b;" onclick="closePembahasan()">Mengerti 👍</button>
+            <div style="font-size: 15px; color: #78909c; margin-top: 15px; font-weight:700;" id="pembahasan-timer-text">Otomatis lanjut dalam 60 detik...</div>
         </div>
     </div>
 
     <script>
-        // Bank Soal: 33 Soal
+        // Bank Soal: 33 Soal Mencakup Seluruh Materi
         const bankSoal = [
-            // PANCAINDRA & KESEHATAN
-            { type: "pg", q: "Manusia memiliki 5 alat indra. Indra yang berfungsi untuk mengecap rasa makanan adalah...", options: ["Hidung", "Lidah", "Kulit", "Telinga"], answer: 1, exp: "Lidah adalah indra pengecap yang membuat kita bisa merasakan manis, asin, asam, dan pahit." },
-            { type: "multi", q: "Yang termasuk ke dalam bagian dari 5 pancaindra manusia adalah...", options: ["Mata", "Jantung", "Telinga", "Lambung", "Kulit"], answer: [0, 2, 4], exp: "5 Pancaindra manusia adalah Mata, Hidung, Telinga, Lidah, dan Kulit." },
-            { type: "bs", q: "Benar atau Salah: Kita boleh membaca buku di tempat yang sangat gelap agar mata sehat.", options: ["Benar", "Salah"], answer: 1, exp: "Salah! Membaca di tempat gelap dapat merusak mata. Kita harus membaca di tempat yang terang." },
-            // GAMBAR 1: DAUN TELINGA (Diperbarui)
-            { type: "image_pg", img: "https://cdn.pixabay.com/photo/2013/07/12/13/21/ear-146903_960_720.png", q: "Perhatikan gambar alat indra di atas! Fungsi utama daun telinga pada manusia adalah...", options: ["Menyaring kotoran besar", "Mengumpulkan suara dari luar", "Menjaga keseimbangan tubuh", "Mendengar suara dari dalam tubuh"], answer: 1, exp: "Daun telinga bentuknya lebar seperti corong untuk membantu mengumpulkan gelombang suara agar masuk ke dalam lubang telinga." },
-            { type: "pg", q: "Rambut halus yang ada di dalam lubang hidung kita berguna untuk...", options: ["Memperindah bentuk hidung", "Menyaring kotoran dan debu yang masuk", "Menghangatkan udara", "Mencium bau wangi saja"], answer: 1, exp: "Rambut hidung dan selaput lendir bertugas menyaring debu agar udara yang masuk ke paru-paru tetap bersih." },
-            { type: "bs", q: "Benar atau Salah: Mendengarkan suara televisi dengan volume yang sangat keras dapat merusak fungsi telinga.", options: ["Benar", "Salah"], answer: 0, exp: "Benar! Suara yang terlalu keras dapat merusak gendang telinga." },
-            { type: "pg", q: "Cara yang benar untuk menjaga kebersihan indra peraba (kulit) adalah...", options: ["Mandi dua kali sehari memakai sabun", "Mandi seminggu sekali", "Berjemur di bawah terik matahari seharian", "Menggosok kulit dengan benda kasar"], answer: 0, exp: "Kulit dijaga kesehatannya dengan rutin mandi dua kali sehari menggunakan air bersih dan sabun." },
+            // MATERI 1 & 2: PANCAINDRA, KEBIASAAN, & DAUN TELINGA
+            { type: "pg", q: "Indra peraba yang membuat kita bisa merasakan panas, dingin, halus, dan kasar adalah...", options: ["Lidah", "Hidung", "Kulit", "Mata"], answer: 2, exp: "Kulit adalah indra peraba yang sangat peka terhadap sentuhan dan suhu di sekitar kita." },
+            { type: "multi", q: "Manakah di bawah ini yang merupakan bagian dari 5 Pancaindra manusia?", options: ["Mata", "Jantung", "Telinga", "Lidah", "Lambung"], answer: [0, 2, 3], exp: "Pancaindra (5 indra) manusia terdiri dari: Mata, Telinga, Hidung, Lidah, dan Kulit." },
+            { type: "image_pg", img: "https://cdn.pixabay.com/photo/2013/07/12/13/21/ear-146903_960_720.png", q: "Perhatikan gambar alat indra pendengaran di atas! Apa fungsi utama dari bagian luar (daun telinga)?", options: ["Mengeluarkan kotoran telinga", "Menjaga keseimbangan tubuh saat berjalan", "Mengumpulkan gelombang suara agar masuk ke dalam", "Mendengar suara perut"], answer: 2, exp: "Bentuk daun telinga yang melebar berfungsi seperti corong untuk menangkap dan mengumpulkan gelombang suara menuju lubang telinga." },
+            { type: "pg", q: "Kebiasaan yang benar untuk menjaga kesehatan mata saat membaca buku adalah...", options: ["Membaca sambil tiduran", "Membaca di tempat yang redup / gelap", "Membaca di tempat yang terang", "Mendekatkan buku sangat dekat dengan wajah"], answer: 2, exp: "Membaca di tempat yang terang membantu mata agar tidak cepat lelah dan terhindar dari kerusakan." },
+            { type: "bs", q: "Benar atau Salah: Mendengarkan musik dengan volume yang sangat keras memakai headset adalah kebiasaan yang baik untuk indra pendengar.", options: ["Benar", "Salah"], answer: 1, exp: "Salah! Suara yang terlalu keras dapat merusak gendang telinga secara permanen." },
+            { type: "pg", q: "Fungsi dari rambut-rambut halus dan selaput lendir di dalam hidung kita adalah...", options: ["Menyaring debu dan kotoran agar tidak masuk ke paru-paru", "Memperindah bentuk hidung", "Untuk mencium berbagai aroma masakan", "Agar udara cepat keluar"], answer: 0, exp: "Rambut hidung menyaring udara kotor yang masuk, sehingga udara yang menuju paru-paru menjadi bersih." },
+            { type: "multi", q: "Cara merawat kebersihan dan kesehatan kulit (indra peraba) adalah...", options: ["Mandi dua kali sehari menggunakan sabun", "Berjemur seharian di bawah matahari terik", "Mengganti pakaian yang kotor dengan pakaian bersih", "Menggosok kulit dengan sikat kawat"], answer: [0, 2], exp: "Kulit harus dijaga dengan mandi teratur dan memakai pakaian yang bersih agar terhindar dari penyakit jamur." },
 
-            // SIKLUS HIDUP & METAMORFOSIS
-            { type: "pg", q: "Urutan daur hidup kupu-kupu yang benar adalah...", options: ["Telur -> Kepompong -> Ulat -> Kupu-kupu", "Telur -> Ulat -> Kepompong -> Kupu-kupu", "Ulat -> Telur -> Kupu-kupu -> Kepompong", "Kupu-kupu -> Kepompong -> Ulat -> Telur"], answer: 1, exp: "Kupu-kupu berasal dari telur, menetas menjadi ulat (larva), menjadi kepompong (pupa), lalu menjadi kupu-kupu dewasa." },
-            { type: "multi", q: "Hewan apa sajakah yang mengalami metamorfosis sempurna?", options: ["Nyamuk", "Kucing", "Katak", "Sapi", "Lalat"], answer: [0, 2, 4], exp: "Metamorfosis sempurna dialami oleh hewan yang bentuk anaknya sangat berbeda dengan induknya, seperti nyamuk, katak, lalat, dan kupu-kupu." },
-            // GAMBAR 2: SIKLUS KATAK (Diperbarui)
-            { type: "image_pg", img: "https://cdn.pixabay.com/photo/2014/04/03/11/56/frog-312645_960_720.png", q: "Tahapan awal pada daur hidup katak sebelum menjadi berudu adalah...", options: ["Katak berekor", "Katak dewasa", "Telur", "Kepompong"], answer: 2, exp: "Siklus hidup katak dimulai dari Telur -> Berudu (Kecebong) -> Katak Berekor (Katak Muda) -> Katak Dewasa." },
-            { type: "pg", q: "Hewan yang mengalami metamorfosis TIDAK sempurna tidak akan melewati fase (tahapan)...", options: ["Telur", "Pupa / Kepompong", "Nimfa / Hewan muda", "Hewan dewasa"], answer: 1, exp: "Metamorfosis tidak sempurna (seperti kecoa dan belalang) hanya melalui 3 tahap: Telur -> Nimfa -> Dewasa. Mereka tidak bertukar menjadi kepompong." },
-            { type: "bs", q: "Benar atau Salah: Saat masih menjadi berudu, katak bernapas menggunakan insang karena hidup di air.", options: ["Benar", "Salah"], answer: 0, exp: "Benar. Berudu hidup di air sehingga bernapas dengan insang. Setelah dewasa katak bernapas dengan paru-paru dan kulit." },
-            { type: "pg", q: "Fase ulat pada daur hidup kupu-kupu sering merugikan petani karena...", options: ["Ulat suka memakan daun tanaman", "Ulat suka memakan buah-buahan", "Ulat membuat tanaman layu", "Ulat terbang mengganggu petani"], answer: 0, exp: "Pada fase ulat (larva), hewan ini sangat rakus memakan daun untuk mengumpulkan energi sebelum menjadi kepompong." },
-            { type: "pg", q: "Jentik-jentik atau udang air yang sering kita lihat di bak mandi adalah tahapan hidup dari hewan...", options: ["Katak", "Kupu-kupu", "Nyamuk", "Lalat"], answer: 2, exp: "Jentik-jentik nyamuk berasal dari telur nyamuk yang menetas di genangan air." },
+            // MATERI 3 & 4: SIKLUS HIDUP KATAK & KUPU-KUPU, METAMORFOSIS
+            { type: "image_pg", img: "https://cdn.pixabay.com/photo/2017/02/08/17/24/butterfly-2049567_960_720.jpg", q: "Kupu-kupu pada gambar mengalami metamorfosis sempurna. Urutan daur hidupnya yang benar adalah...", options: ["Telur -> Kepompong -> Ulat -> Kupu-kupu", "Telur -> Ulat -> Kepompong -> Kupu-kupu", "Ulat -> Telur -> Kupu-kupu -> Kepompong", "Kepompong -> Ulat -> Telur -> Kupu-kupu"], answer: 1, exp: "Kupu-kupu berkembang biak mulai dari Telur menetas jadi Ulat (larva), lalu berdiam diri jadi Kepompong (pupa), hingga menetas jadi Kupu-kupu." },
+            { type: "image_pg", img: "https://cdn.pixabay.com/photo/2014/04/03/11/56/frog-312645_960_720.png", q: "Perhatikan daur hidup katak di atas! Setelah telur menetas, katak akan hidup di air dan bernapas dengan insang. Fase ini disebut...", options: ["Kepompong", "Katak Muda", "Berudu / Kecebong", "Katak Dewasa"], answer: 2, exp: "Berudu (kecebong) adalah anak katak yang masih hidup seperti ikan di air dan bernapas menggunakan insang." },
+            { type: "pg", q: "Hewan yang bentuk tubuh anak dan induknya sangat berbeda serta harus melalui tahap pupa (kepompong) disebut mengalami metamorfosis...", options: ["Tidak sempurna", "Sempurna", "Setengah sempurna", "Tidak bermetamorfosis"], answer: 1, exp: "Metamorfosis Sempurna ditandai dengan perubahan bentuk tubuh yang sangat nyata, seperti melalui tahap kepompong." },
+            { type: "bs", q: "Benar atau Salah: Kecoa dan belalang adalah contoh hewan yang mengalami metamorfosis tidak sempurna karena tidak melewati fase kepompong.", options: ["Benar", "Salah"], answer: 0, exp: "Benar. Metamorfosis tidak sempurna hanya melalui fase: Telur -> Nimfa (Hewan Muda) -> Hewan Dewasa." },
+            { type: "multi", q: "Hewan di bawah ini yang mengalami metamorfosis sempurna adalah...", options: ["Kupu-kupu", "Ayam", "Nyamuk", "Kucing", "Lalat"], answer: [0, 2, 4], exp: "Kupu-kupu, Nyamuk, dan Lalat adalah contoh serangga dengan metamorfosis sempurna." },
+            { type: "pg", q: "Pada daur hidup kupu-kupu, tahap yang paling merugikan bagi petani karena banyak memakan daun tanaman adalah...", options: ["Telur", "Ulat (Larva)", "Kepompong (Pupa)", "Kupu-kupu dewasa"], answer: 1, exp: "Ulat sangat rakus memakan dedaunan agar memiliki cukup energi untuk berubah menjadi kepompong." },
+            { type: "pg", q: "Katak dewasa bernapas menggunakan paru-paru dan...", options: ["Insang", "Sirip", "Kulit yang basah", "Trakea"], answer: 2, exp: "Katak dewasa bernapas dengan paru-paru dan dibantu oleh kulitnya yang selalu lembab." },
 
-            // KOMPONEN BIOTIK ABIOTIK & ENERGI
-            { type: "pg", q: "Semua makhluk hidup dalam suatu lingkungan seperti tumbuhan, hewan, dan manusia disebut komponen...", options: ["Abiotik", "Biotik", "Atmosfer", "Ekosistem"], answer: 1, exp: "Komponen Biotik adalah komponen lingkungan yang terdiri atas makhluk hidup (Bio = hidup)." },
-            { type: "multi", q: "Berikut ini yang merupakan contoh dari komponen abiotik (benda tak hidup) adalah...", options: ["Batu", "Pohon Pisang", "Air", "Tanah", "Burung Merpati"], answer: [0, 2, 3], exp: "Komponen abiotik adalah benda tak hidup penyusun lingkungan, seperti air, batu, tanah, udara, dan cahaya." },
-            { type: "bs", q: "Benar atau Salah: Tumbuhan membutuhkan komponen abiotik seperti air dan sinar matahari untuk membuat makanan.", options: ["Benar", "Salah"], answer: 0, exp: "Benar. Tumbuhan butuh air, tanah, dan sinar matahari (komponen abiotik) untuk melakukan fotosintesis." },
-            // GAMBAR 3: MATAHARI (Diperbarui)
-            { type: "image_pg", img: "https://cdn.pixabay.com/photo/2012/04/18/19/21/sun-37651_960_720.png", q: "Gambar di atas menunjukkan sumber energi abiotik terbesar di bumi, yaitu...", options: ["Bulan", "Bintang", "Matahari", "Listrik"], answer: 2, exp: "Matahari adalah sumber energi panas dan cahaya terbesar di bumi yang merupakan bagian dari komponen abiotik." },
-            { type: "pg", q: "Udara merupakan salah satu komponen abiotik. Gas di udara yang paling penting untuk pernapasan manusia dan hewan adalah...", options: ["Karbondioksida", "Oksigen", "Asap", "Uap air"], answer: 1, exp: "Manusia dan hewan bernapas menghirup Oksigen dan mengeluarkan Karbondioksida." },
+            // MATERI 5 & 6: BIOTIK & ABIOTIK, SUMBER ENERGI TERBESAR
+            { type: "pg", q: "Dalam lingkungan alam, manusia, hewan, dan tumbuhan digolongkan sebagai komponen...", options: ["Biotik", "Abiotik", "Atmosfer", "Buatan"], answer: 0, exp: "Biotik berasal dari kata 'Bio' yang artinya hidup. Jadi komponen biotik adalah semua benda hidup." },
+            { type: "multi", q: "Berikut ini yang merupakan contoh dari komponen abiotik (benda tak hidup) di alam adalah...", options: ["Batu", "Air", "Pohon Mangga", "Udara / Angin", "Kambing"], answer: [0, 1, 3], exp: "Komponen abiotik meliputi benda mati yang penting bagi kehidupan seperti air, udara, tanah, dan cahaya." },
+            { type: "bs", q: "Benar atau Salah: Tumbuhan merupakan komponen biotik yang sangat bergantung pada komponen abiotik seperti air dan sinar matahari.", options: ["Benar", "Salah"], answer: 0, exp: "Benar. Tumbuhan (hidup/biotik) butuh air dan matahari (tak hidup/abiotik) untuk proses fotosintesis." },
+            { type: "image_pg", img: "https://cdn.pixabay.com/photo/2012/04/18/19/21/sun-37651_960_720.png", q: "Gambar di atas menunjukkan sumber energi panas dan cahaya abiotik terbesar di bumi, yaitu...", options: ["Bulan", "Gunung Berapi", "Matahari", "Listrik"], answer: 2, exp: "Matahari adalah pusat tata surya dan sumber energi terbesar dan terpenting bagi seluruh makhluk di bumi." },
+            { type: "pg", q: "Cahaya matahari membantu tumbuhan hijau untuk memasak makanannya sendiri. Proses ini disebut...", options: ["Metamorfosis", "Respirasi", "Fotosintesis", "Penyerbukan"], answer: 2, exp: "Fotosintesis adalah cara tumbuhan membuat makanan dengan bantuan air, karbon dioksida, dan cahaya matahari." },
 
-            // PELESTARIAN LINGKUNGAN & HEMAT AIR
-            { type: "pg", q: "Cara paling mudah yang bisa dilakukan oleh siswa untuk melestarikan lingkungan sekolah adalah...", options: ["Menebang pohon di halaman", "Membuang sampah pada tempatnya", "Membakar sampah di kelas", "Mencoret-coret tembok sekolah"], answer: 1, exp: "Membuang sampah pada tempatnya adalah langkah sederhana menjaga kebersihan dan kelestarian lingkungan." },
-            { type: "multi", q: "Cara yang benar untuk menghemat penggunaan air di rumah adalah...", options: ["Mematikan keran air saat menyikat gigi", "Mandi menggunakan shower air secukupnya", "Menyiram tanaman dengan air yang sangat banyak", "Membiarkan keran air bak mandi meluber"], answer: [0, 1], exp: "Air bersih sangat berharga. Kita harus mematikan keran jika tidak dipakai untuk menghematnya." },
-            { type: "bs", q: "Benar atau Salah: Menanam kembali pohon di hutan yang gundul (reboisasi) dapat mencegah bencana banjir.", options: ["Benar", "Salah"], answer: 0, exp: "Benar! Akar pohon berguna menyerap dan menyimpan air hujan sehingga mencegah banjir." },
-            { type: "pg", q: "Tempat yang dibuat oleh pemerintah untuk melindungi tumbuhan yang hampir punah disebut...", options: ["Kebun binatang", "Suaka margasatwa", "Cagar alam", "Taman bermain"], answer: 2, exp: "Cagar alam adalah daerah khusus untuk melestarikan tumbuhan langka beserta lingkungannya." },
-            { type: "pg", q: "Tindakan manusia yang merusak komponen lingkungan abiotik, khususnya tanah dan air sungai adalah...", options: ["Menanam pohon mangga", "Membuang limbah pabrik dan deterjen ke sungai", "Menyapu halaman rumah", "Membuat taman kota"], answer: 1, exp: "Limbah kimia dan sampah yang dibuang ke sungai akan mencemari air (komponen abiotik) dan mematikan ikan (biotik)." },
-            { type: "pg", q: "Air cucian beras atau sayuran sebaiknya digunakan untuk...", options: ["Diminum", "Mandi", "Menyiram tanaman", "Dibuang ke got"], answer: 2, exp: "Memanfaatkan air bekas cucian beras untuk menyiram tanaman adalah salah satu cara cerdas menghemat air." },
+            // MATERI 7 & 8: LESTARIKAN LINGKUNGAN DAN HEMAT AIR
+            { type: "pg", q: "Cara mudah melestarikan lingkungan agar sekolah tidak banjir saat hujan turun adalah...", options: ["Membuang sampah ke selokan", "Membuang sampah pada tempatnya", "Menebang semua pohon di taman", "Membakar daun kering"], answer: 1, exp: "Membuang sampah sembarangan akan menyumbat saluran air, yang menjadi penyebab utama banjir." },
+            { type: "bs", q: "Benar atau Salah: Menanam pohon kembali di hutan yang sudah gundul disebut Reboisasi dan sangat berguna mencegah tanah longsor.", options: ["Benar", "Salah"], answer: 0, exp: "Benar! Akar pohon akan menahan tanah dan menyerap air hujan." },
+            { type: "multi", q: "Tindakan yang tepat untuk menghemat penggunaan air bersih di rumah adalah...", options: ["Membiarkan keran air bak mandi meluber", "Mematikan keran air saat sedang menyikat gigi", "Menyiram tanaman secukupnya saja", "Mencuci piring di air yang mengalir terus menerus"], answer: [1, 2], exp: "Air bersih harus dijaga. Menutup keran jika tidak dipakai akan sangat menghemat persediaan air bumi." },
+            { type: "pg", q: "Kawasan hutan yang dikhususkan oleh pemerintah untuk melindungi hewan dan tumbuhan yang hampir punah disebut...", options: ["Cagar alam / Suaka margasatwa", "Kebun Binatang", "Taman Kota", "Hutan Produksi"], answer: 0, exp: "Cagar alam dan suaka margasatwa adalah tempat perlindungan makhluk hidup agar tidak punah dari bumi." },
+            { type: "pg", q: "Kita dapat menghemat air dengan cara memanfaatkan air bekas cucian beras untuk...", options: ["Mencuci baju", "Dimasak kembali menjadi minuman", "Menyiram tanaman di halaman", "Mencuci mobil"], answer: 2, exp: "Air cucian beras mengandung banyak nutrisi yang baik untuk menyuburkan tanah tanaman." },
 
-            // TANAMAN SINGKONG & PERKEMBANGBIAKAN
-            { type: "pg", q: "Tanaman singkong atau ubi kayu biasanya berkembang biak (ditanam) menggunakan cara...", options: ["Menanam bijinya", "Stek batang (menancapkan potongan batang)", "Mencangkok daunnya", "Menanam bunganya"], answer: 1, exp: "Singkong sangat mudah ditanam dengan cara stek batang, yaitu memotong batang singkong dan menancapkannya ke tanah." },
-            { type: "bs", q: "Benar atau Salah: Tanaman singkong menyimpan cadangan makanannya di bagian daun.", options: ["Benar", "Salah"], answer: 1, exp: "Salah! Tanaman singkong menyimpan cadangan makanannya di dalam tanah pada bagian akar (umbi akar)." },
-            // GAMBAR 4: SINGKONG (Diperbarui)
-            { type: "image_pg", img: "https://images.pexels.com/photos/5945823/pexels-photo-5945823.jpeg?auto=compress&cs=tinysrgb&w=600", q: "Perhatikan gambar panen tanaman di atas! Bagian yang biasa direbus atau digoreng untuk kita makan adalah...", options: ["Batang", "Daun", "Akar/Umbi", "Bunga"], answer: 2, exp: "Umbi akar pada singkong adalah bagian yang membesar berisi karbohidrat yang biasa kita jadikan makanan." },
-            
-            // TAMBAHAN ACAK
-            { type: "multi", q: "Dari daftar di bawah ini, mana saja hewan yang daur hidupnya dimulai dari telur?", options: ["Sapi", "Ayam", "Kupu-kupu", "Katak", "Kucing"], answer: [1, 2, 3], exp: "Sapi dan kucing berkembang biak dengan cara beranak (melahirkan), sedangkan ayam, kupu-kupu, dan katak dari telur." },
-            { type: "pg", q: "Organ yang berfungsi memompa darah dalam tubuh kita tidak termasuk pancaindra. Organ tersebut adalah...", options: ["Jantung", "Paru-paru", "Mata", "Kulit"], answer: 0, exp: "Jantung berfungsi memompa darah, ia adalah organ dalam, bukan pancaindra." },
-            { type: "bs", q: "Benar atau Salah: Matahari hanya berguna untuk menghangatkan bumi, tidak ada gunanya bagi tumbuhan.", options: ["Benar", "Salah"], answer: 1, exp: "Salah! Matahari sangat penting bagi tumbuhan untuk melakukan fotosintesis (membuat makanan)." },
-            { type: "pg", q: "Salah satu olahan makanan tradisional yang berasal dari tumbuhan singkong adalah...", options: ["Keju", "Getuk", "Sosis", "Roti gandum"], answer: 1, exp: "Getuk, tiwul, dan keripik singkong adalah makanan lezat yang dibuat dari umbi singkong." },
-            { type: "pg", q: "Saat kupu-kupu hinggap dari satu bunga ke bunga lain untuk mengisap nektar, secara tidak sengaja ia juga membantu...", options: ["Merusak bunga", "Penyerbukan bunga", "Bunga menjadi layu", "Bunga dimakan ulat"], answer: 1, exp: "Kupu-kupu membantu proses penyerbukan pada tumbuhan agar tumbuhan bisa menghasilkan buah/biji." }
+            // MATERI 9: PERKEMBANGBIAKAN SINGKONG
+            { type: "image_pg", img: "https://images.pexels.com/photos/5945823/pexels-photo-5945823.jpeg?auto=compress&cs=tinysrgb&w=600", q: "Perhatikan gambar singkong di atas! Tanaman singkong menyimpan cadangan makanannya di bagian...", options: ["Bunga", "Daun", "Umbi Akar (di dalam tanah)", "Batang"], answer: 2, exp: "Singkong menyimpan karbohidrat sebagai cadangan makanan di bagian akarnya, yang membesar menjadi umbi." },
+            { type: "pg", q: "Cara paling umum dilakukan petani untuk mengembangbiakkan (menanam) singkong adalah dengan cara...", options: ["Menanam bijinya", "Stek batang (menancapkan potongan batang ke tanah)", "Mencangkok daun", "Menanam bunganya"], answer: 1, exp: "Singkong sangat mudah ditumbuhkan dengan teknik stek batang. Cukup potong batangnya lalu tancapkan di tanah." },
+            { type: "bs", q: "Benar atau Salah: Daun pada tanaman singkong sama sekali tidak bisa dimakan oleh manusia.", options: ["Benar", "Salah"], answer: 1, exp: "Salah! Pucuk daun singkong justru sangat lezat dan sering dimasak menjadi sayur oleh masyarakat Indonesia." },
+
+            // TAMBAHAN ACAK UNTUK VARIASI
+            { type: "pg", q: "Selain Matahari, salah satu contoh komponen abiotik yang kita hirup setiap saat untuk bernapas adalah...", options: ["Udara (Oksigen)", "Cahaya", "Air", "Batu"], answer: 0, exp: "Oksigen di udara adalah komponen abiotik mutlak yang dibutuhkan manusia dan hewan untuk hidup." },
+            { type: "multi", q: "Hewan berikut ini yang TIDAK mengalami proses metamorfosis (bentuk anak sama dengan induknya) adalah...", options: ["Sapi", "Katak", "Kupu-kupu", "Kucing", "Kambing"], answer: [0, 3, 4], exp: "Sapi, kucing, dan kambing berkembang biak dengan melahirkan dan bentuk anaknya sama persis dengan induknya (hanya berbeda ukuran)." },
+            { type: "pg", q: "Tindakan manusia membuang limbah pabrik atau deterjen ke sungai dapat merusak komponen biotik, yaitu...", options: ["Udara menjadi segar", "Batu sungai menjadi besar", "Ikan-ikan di sungai akan mati keracunan", "Jembatan menjadi rusak"], answer: 2, exp: "Air sungai yang tercemar bahan kimia (deterjen/limbah) sangat beracun bagi komponen biotik yang hidup di dalamnya, seperti ikan." },
+            { type: "bs", q: "Benar atau Salah: Menggunakan air keran selang untuk menyapu sampah daun di halaman adalah tindakan hemat air.", options: ["Benar", "Salah"], answer: 1, exp: "Salah! Membersihkan halaman dengan menyemprotkan air sangat boros. Gunakanlah sapu lidi." },
+            { type: "pg", q: "Kupu-kupu sering hinggap dari satu bunga ke bunga lainnya. Hal ini secara tidak langsung membantu tumbuhan dalam proses...", options: ["Fotosintesis", "Penyerbukan (Perkembangbiakan)", "Mencari air", "Menggugurkan daun"], answer: 1, exp: "Saat kupu-kupu mencari nektar, serbuk sari bunga akan menempel di badannya dan terbawa ke bunga lain sehingga terjadi penyerbukan." },
+            { type: "multi", q: "Bagian tubuh tanaman singkong yang bisa dimanfaatkan manusia sebagai sumber makanan adalah...", options: ["Umbi akarnya (Singkong)", "Batang kayunya", "Daun pucuknya", "Bunga beracunnya"], answer: [0, 2], exp: "Umbi singkong bisa direbus atau digoreng, dan daunnya sangat sehat untuk dimasak menjadi sayur." }
         ];
 
         let userName = "";
@@ -316,7 +316,7 @@
         let pembInterval;
         let pembTimeLeft = 60;
 
-        // Elements
+        // Mendefinisikan Elemen HTML
         const screens = {
             start: document.getElementById('start-screen'),
             quiz: document.getElementById('quiz-screen'),
@@ -342,6 +342,7 @@
             fMsg: document.getElementById('final-message')
         };
 
+        // Fungsi Pengacak Array (Fisher-Yates)
         function shuffle(array) {
             let arr = [...array];
             for (let i = arr.length - 1; i > 0; i--) {
@@ -351,15 +352,18 @@
             return arr;
         }
 
+        // Fungsi Memulai Kuis
         function startQuiz() {
             let input = els.nameInput.value.trim();
             if(!input && !userName) {
-                alert("Isi namamu dulu ya sebelum mulai belajar!");
+                alert("Hei, isi namamu dulu ya agar permainannya makin seru!");
                 return;
             }
             if(input) userName = input;
 
             els.playerDisplay.innerText = "⭐ " + userName;
+            
+            // Pilih acak 25 soal dari total 33 bank soal
             selectedQuestions = shuffle(bankSoal).slice(0, totalQuestions);
             currentIndex = 0;
             score = 0;
@@ -368,11 +372,13 @@
             loadQuestion();
         }
 
+        // Fungsi Pindah Layar
         function switchScreen(screenId) {
             Object.values(screens).forEach(s => s.classList.remove('active'));
             screens[screenId].classList.add('active');
         }
 
+        // Fungsi Memuat Soal Saat Ini
         function loadQuestion() {
             clearInterval(timerInterval);
             timeLeft = 60;
@@ -384,17 +390,17 @@
             els.counter.innerText = `Soal ${currentIndex + 1} dari ${totalQuestions}`;
             els.qText.innerText = q.q;
 
-            // Handle Image
+            // Memuat Gambar jika Tipe Soal bergambar
             if(q.type === 'image_pg' && q.img) {
                 els.qImg.src = q.img;
                 els.qImg.style.display = 'block';
             }
 
-            // Handle Badge
+            // Memuat Label Kategori Soal
             let typeText = q.type === 'multi' ? "Pilih Jawaban Lebih Dari Satu!" : (q.type === 'bs' ? "Pilih Benar atau Salah!" : "Pilihan Ganda");
             els.badgeCont.innerHTML = `<span class="badge-type">${typeText}</span>`;
 
-            // Render Options
+            // Memuat Pilihan Jawaban
             els.optionsBox.innerHTML = "";
             
             if(q.type === 'pg' || q.type === 'image_pg') {
@@ -426,7 +432,7 @@
                 els.btnMulti.style.display = 'block';
             }
 
-            // Start Timer
+            // Memulai Timer Soal
             timerInterval = setInterval(() => {
                 timeLeft--;
                 updateTimerUI();
@@ -447,7 +453,7 @@
                 els.timeText.style.color = "var(--danger)";
             } else {
                 els.timerFill.style.background = "var(--success)";
-                els.timeText.style.color = "#b2bec3";
+                els.timeText.style.color = "#78909c";
             }
         }
 
@@ -457,6 +463,7 @@
             els.btnMulti.disabled = true;
         }
 
+        // Cek Jawaban Pilihan Ganda & Benar/Salah
         function checkAnswerPG(selectedIdx) {
             clearInterval(timerInterval);
             disableInputs();
@@ -465,6 +472,7 @@
             showFeedback(isCorrect);
         }
 
+        // Cek Jawaban Multiple Choice Checkbox
         function checkMultiAnswer() {
             clearInterval(timerInterval);
             disableInputs();
@@ -473,7 +481,8 @@
             checkboxes.forEach(cb => { if(cb.checked) selected.push(parseInt(cb.value)); });
             
             let correctArr = selectedQuestions[currentIndex].answer;
-            // Validasi jumlah dan isi array
+            
+            // Cek apakah jumlah jawaban sama dan isinya identik
             let isCorrect = selected.length === correctArr.length && selected.every(val => correctArr.includes(val));
             
             if(isCorrect) score++;
@@ -485,21 +494,24 @@
             showFeedback(false, true);
         }
 
+        // Menampilkan Pop-Up Benar atau Salah
         function showFeedback(isCorrect, isTimeout = false) {
             els.fbModal.style.display = 'flex';
             if(isCorrect) {
                 els.fbMsg.innerHTML = `<span class="benar">🎉 ${userName} kamu Hebat!</span>`;
             } else {
-                let msg = isTimeout ? `⏰ Yah waktu habis!` : `💪 Coba Lagi ya, ${userName}!`;
+                let msg = isTimeout ? `⏰ Yah, waktu habis!` : `💪 Coba Lagi ya, ${userName}!`;
                 els.fbMsg.innerHTML = `<span class="salah">${msg}</span>`;
             }
             
+            // Lanjut ke Pembahasan setelah 1.5 detik
             setTimeout(() => {
                 els.fbModal.style.display = 'none';
                 showPembahasan();
             }, 1500);
         }
 
+        // Menampilkan Pop-Up Pembahasan
         function showPembahasan() {
             els.pembModal.style.display = 'flex';
             els.pembText.innerText = selectedQuestions[currentIndex].exp;
@@ -514,6 +526,7 @@
             }, 1000);
         }
 
+        // Menutup Pembahasan & Melanjutkan ke Soal Berikutnya
         function closePembahasan() {
             clearInterval(pembInterval);
             els.pembModal.style.display = 'none';
@@ -526,16 +539,16 @@
             }
         }
 
+        // Menampilkan Hasil Akhir
         function showResult() {
             switchScreen('end');
             let finalVal = Math.round((score / totalQuestions) * 100);
             els.fScore.innerText = finalVal;
             
-            if(finalVal >= 90) els.fMsg.innerText = `Luar Biasa, ${userName}! Kamu sangat pintar! 🏆`;
-            else if(finalVal >= 75) els.fMsg.innerText = `Kerja Bagus, ${userName}! Tingkatkan belajarmu ya! 🌟`;
-            else els.fMsg.innerText = `Tetap Semangat, ${userName}! Jangan menyerah! 💪`;
+            if(finalVal >= 90) els.fMsg.innerText = `Luar Biasa, ${userName}! Kamu sangat cerdas! 🏆`;
+            else if(finalVal >= 75) els.fMsg.innerText = `Kerja Bagus, ${userName}! Yuk, tingkatkan lagi! 🌟`;
+            else els.fMsg.innerText = `Tetap Semangat, ${userName}! Jangan pernah menyerah! 💪`;
         }
     </script>
 </body>
 </html>
-
